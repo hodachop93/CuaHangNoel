@@ -17,14 +17,14 @@
 					Your email or username
 					</label>
 					<input type="text" name="username" value=""
-						placeholder="Username or email" required="required" data-icon="u">
+						placeholder="Username or email" required="required">
 				</p>
 				<p>
 					<label>
 					Your password
 					</label>
 					<input type="password" name="password" value=""
-						placeholder="assword" required="required" data-icon="p">
+						placeholder="Password" required="required">
 				</p>
 				<p class="submit">
 					<input type="submit" name="btnSubmit" value="Login">

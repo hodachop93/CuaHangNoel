@@ -34,7 +34,7 @@
 			<th>Mã khách hàng</th>
 			<th>Tên khách hàng</th>
 			<th>Số lượng</th>
-			<th>Địa chỉ nhân quà</th>
+			<th>Địa chỉ nhận quà</th>
 			<th>Thời gian nhận quà</th>
 		</tr>
 		<% 

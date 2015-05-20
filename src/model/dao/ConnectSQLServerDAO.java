@@ -48,7 +48,7 @@ public class ConnectSQLServerDAO {
 		}
 	}
 
-	public boolean isExistData(String sqlStr) {
+	private boolean isExistData(String sqlStr) {
 		openConnection();
 		try {
 			statement = connection.createStatement();
@@ -63,16 +63,25 @@ public class ConnectSQLServerDAO {
 		}
 		return false;
 	}
-
 	
+	private void myExecuteUpdate(String sqlStr) {
+		openConnection();
+		try {
+			statement = connection.createStatement();
+			statement.executeUpdate(sqlStr);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+	}
 
 	public ArrayList<DonHang> getAllDonHang() {
 		DonHang temp = null;
 		ArrayList<DonHang> listDonHang = new ArrayList<DonHang>();
 		openConnection();
 		String sql = "SELECT MaDH, a.MaKH, TenKH, SoLuongQua, DiaChiNhanQua, ThoiGianNhanQua "
-				+ "FROM DONHANG a, KHACHHANG b "
-				+ "WHERE a.MaKH = b.MaKH";
+				+ "FROM DONHANG a, KHACHHANG b " + "WHERE a.MaKH = b.MaKH";
 		try {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
@@ -86,11 +95,46 @@ public class ConnectSQLServerDAO {
 				temp.setTGNhanQua(rs.getString("ThoiGianNhanQua"));
 				listDonHang.add(temp);
 			}
-			
-		} catch (SQLException e){
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return listDonHang;
+	}
+
+	public Boolean isValidDonHang(String userID, String orderID,
+			String customerName, String customerPhone, String customerAddress,
+			String addressGift, String timeGift, String numberGift) {
+
+		Boolean isValid;
+		String sql;
+		// Nhap khach hang
+		// Kiem tra khach hang da co trong bang chua?
+
+		sql = "SELECT MaKH FROM KHACHHANG WHERE MaKH = " + userID;
+		if (!isExistData(sql)) {
+			// Neu khong ton tai, nhap du lieu vao
+			sql = String.format(
+					"INSERT INTO KHACHHANG VALUES ('%s', N'%s', '%s', N'%s')",
+					userID, customerName, customerPhone, customerAddress);
+			myExecuteUpdate(sql);
+		}
+		
+		//Nhap don hang
+		//Kiem tra don hang da co trong bang hay chua?
+		sql = "SELECT MaDH FROM DONHANG WHERE MaDH = " + orderID;
+		if (isExistData(sql)){
+			//Don hang da co
+			isValid = false;
+		}
+		else {
+			//Don hang chua co, nhap vao
+			isValid = true;
+			sql = String.format("INSERT INTO DONHANG VALUES ('%s', '%s', N'%s', )", args)
+		}
+
+		return isValid;
+
 	}
 
 }

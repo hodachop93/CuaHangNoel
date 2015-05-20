@@ -29,4 +29,14 @@
     <servlet-name>CheckDirectionServlet</servlet-name>
     <url-pattern>/CheckDirectionServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckDonHangServlet</display-name>
+    <servlet-name>CheckDonHangServlet</servlet-name>
+    <servlet-class>controller.CheckDonHangServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckDonHangServlet</servlet-name>
+    <url-pattern>/CheckDonHangServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

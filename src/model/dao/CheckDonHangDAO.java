@@ -9,5 +9,13 @@ public class CheckDonHangDAO {
 	public ArrayList<DonHang> getDonHang() {
 		return connnectSQLServerDAO.getAllDonHang();
 	}
+	public Boolean isValidDonHang(String userID, String orderID,
+			String customerName, String customerPhone, String customerAddress,
+			String addressGift, String timeGift, String numberGift) {
+
+		return connnectSQLServerDAO.isValidDonHang(userID, orderID,
+				customerName, customerPhone, customerAddress, addressGift, timeGift,
+				numberGift);
+	}
 
 }
