@@ -7,6 +7,20 @@ public class DonHang {
 	private int soLuong;
 	private String DCNhanQua;
 	private String TGNhanQua;
+	
+	public DonHang() {
+		super();
+	}
+	public DonHang(String maDH, String maKH, String tenKH, int soLuong,
+			String dCNhanQua, String tGNhanQua) {
+		super();
+		this.maDH = maDH;
+		this.maKH = maKH;
+		this.tenKH = tenKH;
+		this.soLuong = soLuong;
+		DCNhanQua = dCNhanQua;
+		TGNhanQua = tGNhanQua;
+	}
 	public String getDCNhanQua() {
 		return DCNhanQua;
 	}

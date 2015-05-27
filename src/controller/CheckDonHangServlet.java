@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +55,10 @@ public class CheckDonHangServlet extends HttpServlet {
 		Boolean isValid = checkDonHangBO.isValidDonHang(userID, orderID,
 				customerName, customerPhone, customerAddress, addressGift, timeGift,
 				numberGift);
+		if (isValid) {
+			RequestDispatcher rd = request.getRequestDispatcher("ShowHomeServlet");
+			rd.forward(request, response);
+		}
 	}
 
 }

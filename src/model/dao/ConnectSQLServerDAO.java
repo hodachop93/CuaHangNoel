@@ -8,6 +8,7 @@ import javax.sql.*;
 import model.bean.DonHang;
 
 public class ConnectSQLServerDAO {
+	public static String diaChiCuaHang = "125 Đặng Huy Trứ";
 	String driverClassStr = "net.sourceforge.jtds.jdbc.Driver";
 	String databaseName = "CuaHangNoel";
 	String hostName = "HODACHOP";
@@ -63,7 +64,7 @@ public class ConnectSQLServerDAO {
 		}
 		return false;
 	}
-	
+
 	private void myExecuteUpdate(String sqlStr) {
 		openConnection();
 		try {
@@ -104,7 +105,8 @@ public class ConnectSQLServerDAO {
 
 	public Boolean isValidDonHang(String userID, String orderID,
 			String customerName, String customerPhone, String customerAddress,
-			String addressGift, String timeGift, String numberGift) {
+			String addressGift, String timeGift, String numberGift,
+			int soTienPhuThu, int mucPhi) {
 
 		Boolean isValid;
 		String sql;
@@ -119,18 +121,24 @@ public class ConnectSQLServerDAO {
 					userID, customerName, customerPhone, customerAddress);
 			myExecuteUpdate(sql);
 		}
-		
-		//Nhap don hang
-		//Kiem tra don hang da co trong bang hay chua?
+
+		// Nhap don hang
+		// Kiem tra don hang da co trong bang hay chua?
 		sql = "SELECT MaDH FROM DONHANG WHERE MaDH = " + orderID;
-		if (isExistData(sql)){
-			//Don hang da co
+		if (isExistData(sql)) {
+			// Don hang da co
 			isValid = false;
-		}
-		else {
-			//Don hang chua co, nhap vao
+		} else {
+			// Don hang chua co, nhap vao
 			isValid = true;
-			sql = String.format("INSERT INTO DONHANG VALUES ('%s', '%s', N'%s', )", args)
+			DonHang donhang = new DonHang(orderID, userID, customerName,
+					Integer.parseInt(numberGift), addressGift, timeGift);
+			sql = String
+					.format("INSERT INTO DONHANG VALUES ('%s', '%s', N'%s', '%s', %d, %d, %d)",
+							donhang.getMaDH(), donhang.getMaKH(),
+							donhang.getDCNhanQua(), donhang.getTGNhanQua(),
+							soTienPhuThu, donhang.getSoLuong(), mucPhi);
+			myExecuteUpdate(sql);
 		}
 
 		return isValid;

@@ -11,11 +11,11 @@ public class CheckDonHangDAO {
 	}
 	public Boolean isValidDonHang(String userID, String orderID,
 			String customerName, String customerPhone, String customerAddress,
-			String addressGift, String timeGift, String numberGift) {
+			String addressGift, String timeGift, String numberGift, int soTienPhuThu, int mucPhi) {
 
 		return connnectSQLServerDAO.isValidDonHang(userID, orderID,
 				customerName, customerPhone, customerAddress, addressGift, timeGift,
-				numberGift);
+				numberGift, soTienPhuThu, mucPhi);
 	}
 
 }
